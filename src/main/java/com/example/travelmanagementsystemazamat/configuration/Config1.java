@@ -9,8 +9,7 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class Config1 {
 
-    @Bean(initMethod = "init" ,
-            destroyMethod = "destroy")
+
     @Lazy
 //    @Scope("singleton")
     public User user1(){
@@ -22,8 +21,7 @@ public class Config1 {
         return user;
     }
 
-    @Bean(initMethod = "init" ,
-            destroyMethod = "destroy")
+
     @Lazy
     @Scope("prototype")
     public User user2(){

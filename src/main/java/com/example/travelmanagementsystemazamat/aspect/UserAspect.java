@@ -3,6 +3,7 @@ package com.example.travelmanagementsystemazamat.aspect;
 import com.example.travelmanagementsystemazamat.Entities.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

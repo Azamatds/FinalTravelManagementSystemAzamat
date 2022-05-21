@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JDBCUserServiceImplTest {
 //    @Mock
@@ -35,22 +36,29 @@ class JDBCUserServiceImplTest {
     @Test
     void testGetAllUsers() {
         when(jdbcUserRepository.getAll()).thenReturn(
-                Stream.of(new User(1,"a","b",10),new User("SSS-333",333333)).collect(
+                Stream.of(new User(1,"a","b",10),new User(2,"v","s",16)).collect(
                         Collectors.toList()));
-        assertEquals(2,ticketServiceImpl.getAllTickets().size());
+        assertEquals(2,jDBCUserServiceImpl.getAllUsers().size());
     }
 
     @Test
     void testGetUser() {
-        when(jdbcUserRepository.getById(anyInt())).thenReturn(null);
+        User user = new User(1,"a","b",10);
+        int id = 1;
+        when(jdbcUserRepository.getById(user.getId()))
+                .thenReturn(Optional.of(user));
 
-        Optional<User> result = jDBCUserServiceImpl.getUser(0);
-        Assertions.assertEquals(null, result);
+        Optional<User> optionalUser = jDBCUserServiceImpl.getUser(id);
+
+        Assertions.assertEquals(Optional.of(user), optionalUser);
+
     }
 
     @Test
     void testDeleteUser() {
-        jDBCUserServiceImpl.deleteUser(0);
+        int id = 1;
+        jDBCUserServiceImpl.deleteUser(id);
+        verify(jdbcUserRepository,times(1)).deleteById(id);
     }
 
     @Test
@@ -71,10 +79,7 @@ class JDBCUserServiceImplTest {
         jDBCUserServiceImpl.update("user");
     }
 
-    @Test
-    void testTestScheduling() {
-        jDBCUserServiceImpl.testScheduling();
-    }
+
 }
 
 //Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme

@@ -5,6 +5,7 @@ import com.example.travelmanagementsystemazamat.Repository.impl.JDBCUserReposito
 import com.example.travelmanagementsystemazamat.Service.JDBCUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@PropertySource("classpath:application.properties")
 public class JDBCUserServiceImpl implements JDBCUserService {
 
     private static List<User> myUser = new ArrayList<>();
@@ -65,7 +67,8 @@ public class JDBCUserServiceImpl implements JDBCUserService {
         jdbcUserRepository.update(user);
     }
 
-    @Scheduled(initialDelay=1000, fixedRate=3000)
+
+    @Scheduled(initialDelay=1000L, fixedDelayString="${task.delay}")
     public void testScheduling() throws InterruptedException {
         boolean flag = true;
         int size = myUser.size();

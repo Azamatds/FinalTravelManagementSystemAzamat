@@ -18,4 +18,5 @@ public interface JDBCUserService<T>{
     void save(T user);
 
     void update(T user);
+
 }

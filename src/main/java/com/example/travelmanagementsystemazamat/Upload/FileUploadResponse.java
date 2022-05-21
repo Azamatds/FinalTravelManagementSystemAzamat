@@ -1,7 +1,5 @@
 package com.example.travelmanagementsystemazamat.Upload;
 
-package com.example.azamatspring.Upload;
-
 public class FileUploadResponse {
     private String fileName;
     private String downloadUri;
